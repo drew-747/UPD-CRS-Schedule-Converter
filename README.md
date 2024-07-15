@@ -26,6 +26,9 @@ The UPD CRS Schedule Converter is a browser extension that simplifies the proces
 ## Contribution
 Feel free to fork the repository and submit pull requests for new features or bug fixes.
 
+## Support
+If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/drew-747/UPD-CRS-Schedule-Converter).
+
 ## License
 This project is licensed under the MIT License.
 
