@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "UPD CRS Schedule Converter",
+  "version": "1.0",
+  "description": "Converts UPD CRS schedule to ICalendar (.ics), CSV, and JSON formats",
+  "permissions": ["activeTab", "downloads"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon-16.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://crs.upd.edu.ph/student_registration*"],
+      "js": ["content.js"]
+    }
+  ]
+}
