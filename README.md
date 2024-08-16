@@ -3,10 +3,10 @@
 ## UPD CRS Schedule Converter
 
 ## Overview
-The UPD CRS Schedule Converter is a browser extension that converts UPD CRS schedules into formats compatible with various calendar applications. 
+The UPD CRS Schedule Converter is a browser extension that converts UPD CRS schedules into formats compatible with commonly used calendar and scheduling applications. 
 
 ## 🚀 Features
-- 🔄 Converts UPD CRS schedules into accessible formats.
+- 🔄 Converts UPD CRS schedules into various formats (.ics, CSV and json)
 - 📅 Integrates seamlessly with multiple calendar applications.
 
 ## 📥 Installation
@@ -14,13 +14,15 @@ The UPD CRS Schedule Converter is a browser extension that converts UPD CRS sche
     ```bash
     git clone https://github.com/drew-747/UPD-CRS-Schedule-Converter.git
     ```
-2. **Load the extension** in developer mode through your browser's extension settings.
+2. **Load the extension** in developer mode through your browser's extension settings by selecting "load unpacked."
 
 ## 🛠️ Usage
-1. **Pin** this extension on your browser.
-2. Navigate to the **UPD CRS Portal**.
-3. Access the **Student Registration** section of the UPD CRS Portal.
-4. Open the extension and select your preferred download format.
+1. **Pin** this extension on your browser once successfully installed.
+2. Login and navigate to the **UPD CRS Portal**.
+3. Access the **Student Registration** section of the UPD CRS Portal found on the left hand side.
+5. **Click** the extension and select your preferred download format.
+6. **Save** the file on your device.
+7. Import/access file on application of choice.
 
 ## 📜 License
 This project is licensed under the MIT License. 
