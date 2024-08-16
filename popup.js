@@ -131,16 +131,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const timeRanges = {
+        // Common two-day schedules
+        "07:00AM to 08:30AM": { start: "070000", end: "083000" },
+        "08:30AM to 10:00AM": { start: "083000", end: "100000" },
+        "10:00AM to 11:30AM": { start: "100000", end: "113000" },
+        "11:30AM to 01:00PM": { start: "113000", end: "130000" },
+        "01:00PM to 02:30PM": { start: "130000", end: "143000" },
+        "02:30PM to 04:00PM": { start: "143000", end: "160000" },
+        "04:00PM to 05:30PM": { start: "160000", end: "173000" },
+        "05:30PM to 07:00PM": { start: "173000", end: "190000" },
+        
         "07:00AM to 08:45AM": { start: "070000", end: "084500" },
         "08:45AM to 09:00AM": { start: "084500", end: "090000" },
         "09:00AM to 09:45AM": { start: "090000", end: "094500" },
         "09:45AM to 10:00AM": { start: "094500", end: "100000" },
-        "10:00AM to 11:30AM": { start: "100000", end: "113000" },
         "11:30AM to 01:00PM": { start: "113000", end: "130000" },
         "01:00PM to 02:00PM": { start: "130000", end: "140000" },
         "02:00PM to 03:00PM": { start: "140000", end: "150000" },
         "03:00PM to 04:00PM": { start: "150000", end: "160000" },
-        "04:00PM to 05:30PM": { start: "160000", end: "173000" }
     };
 
     function convertToICS(schedule) {
