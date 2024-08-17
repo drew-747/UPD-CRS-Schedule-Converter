@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const timeRanges = {
-        // Common two-day schedules
+        // Two-day GE schedules
         "07:00AM to 08:30AM": { start: "070000", end: "083000" },
         "08:30AM to 10:00AM": { start: "083000", end: "100000" },
         "10:00AM to 11:30AM": { start: "100000", end: "113000" },
@@ -141,14 +141,38 @@ document.addEventListener('DOMContentLoaded', function() {
         "04:00PM to 05:30PM": { start: "160000", end: "173000" },
         "05:30PM to 07:00PM": { start: "173000", end: "190000" },
         
+        // Two-day PE schedules
+        "07:00AM to 08:00AM": { start: "070000", end: "080000" },
+        "08:00AM to 09:00AM": { start: "080000", end: "090000" },
+        "09:00AM to 10:00AM": { start: "090000", end: "100000" },
+        "10:00AM to 11:00AM": { start: "100000", end: "110000" },
+        "11:00AM to 12:00PM": { start: "110000", end: "120000" },
+        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
+        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
+        "03:00PM to 04:00PM": { start: "150000", end: "160000" },
+        "04:00PM to 05:00PM": { start: "160000", end: "170000" },
+
+        // One-day PE schedules
+        "07:00AM to 09:00AM": { start: "070000", end: "090000" },
+        "09:00AM to 11:00AM": { start: "090000", end: "110000" },
+        "11:00AM to 01:00PM": { start: "110000", end: "130000" },
+        "01:00PM to 03:00PM": { start: "130000", end: "150000" },
+        "03:00PM to 05:00PM": { start: "150000", end: "170000" },
+
+        "08:00AM to 10:00AM": { start: "080000", end: "100000" },
+        "10:00AM to 12:00PM": { start: "100000", end: "120000" },
+        "12:00PM to 02:00PM": { start: "120000", end: "140000" },
+        "02:00PM to 04:00PM": { start: "140000", end: "160000" },
+
+        
         "07:00AM to 08:45AM": { start: "070000", end: "084500" },
         "08:45AM to 09:00AM": { start: "084500", end: "090000" },
         "09:00AM to 09:45AM": { start: "090000", end: "094500" },
         "09:45AM to 10:00AM": { start: "094500", end: "100000" },
         "11:30AM to 01:00PM": { start: "113000", end: "130000" },
-        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
-        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
-        "03:00PM to 04:00PM": { start: "150000", end: "160000" },
+        // "01:00PM to 02:00PM": { start: "130000", end: "140000" },
+        // "02:00PM to 03:00PM": { start: "140000", end: "150000" },
+        // "03:00PM to 04:00PM": { start: "150000", end: "160000" },
     };
 
     function convertToICS(schedule) {
