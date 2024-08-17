@@ -130,61 +130,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const timeRanges = {
-        "07:00AM to 08:30AM": { start: "070000", end: "083000" },
-        "08:00AM to 09:00AM": { start: "080000", end: "090000" },
-        "08:30AM to 10:00AM": { start: "083000", end: "100000" },
-        "10:00AM to 11:30AM": { start: "100000", end: "113000" },
-        "11:30AM to 01:00PM": { start: "113000", end: "130000" },
-        "01:00PM to 02:30PM": { start: "130000", end: "143000" },
-        "02:30PM to 04:00PM": { start: "143000", end: "160000" },
-        "04:00PM to 05:30PM": { start: "160000", end: "173000" },
-        "05:30PM to 07:00PM": { start: "173000", end: "190000" },
-    
-        // Extended or non-standard times
-        "07:00AM to 08:45AM": { start: "070000", end: "084500" },
-        "08:45AM to 09:00AM": { start: "084500", end: "090000" },
-        "09:00AM to 09:45AM": { start: "090000", end: "094500" },
-        "09:45AM to 10:00AM": { start: "094500", end: "100000" },
-        "10:00AM to 12:00PM": { start: "100000", end: "120000" },
-        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
-        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
-        "03:00PM to 04:00PM": { start: "150000", end: "160000" },
-
-        // For 3-hour classes (Lab)
-        "07:00AM to 10:00AM": { start: "070000", end: "100000" },
-        "10:00AM to 01:00PM": { start: "100000", end: "130000" },
-        "01:00PM to 04:00PM": { start: "130000", end: "160000" },
-        "04:00PM to 07:00PM": { start: "160000", end: "190000" },
-
-        // For 4-hour classes (lab)
-        "07:00AM to 11:00AM": { start: "070000", end: "110000" },
-        "11:00AM to 03:00PM": { start: "110000", end: "150000" },
-        "03:00PM to 07:00PM": { start: "150000", end: "190000" },
-        "07:00PM to 11:00PM": { start: "190000", end: "230000" },
-        
-        // Special cases for Hour-Long PE or short-duration GE Classes
-        "07:00AM to 08:00AM": { start: "070000", end: "080000" },
-        "08:00AM to 09:00AM": { start: "080000", end: "090000" },
-        "09:00AM to 10:00AM": { start: "090000", end: "100000" },
-        "10:00AM to 11:00AM": { start: "100000", end: "110000" },
-        "11:00AM to 12:00PM": { start: "110000", end: "120000" },
-        "12:00PM to 01:00PM": { start: "120000", end: "130000" },
-        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
-        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
-        "03:00PM to 04:00PM": { start: "150000", end: "160000" },
-        "04:00PM to 05:00PM": { start: "160000", end: "170000" },
-        "05:00PM to 06:00PM": { start: "170000", end: "180000" },
-        "06:00PM to 07:00PM": { start: "180000", end: "190000" }
-    };
-
     function convertToICS(schedule) {
         const { startDate, endDate } = getSemesterDates();
         let icsContent = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//UPD CRS Schedule Converter//EN\n';
         schedule.forEach(item => {
             const dayAbbr = getDayAbbreviation(item.day);
             const [startTimeStr, endTimeStr] = item.time.split(' to ');
-            const start = getTimeRange(startTimeStr + ' to ' + endTimeStr).start;
+            const start = getTimeRange(startTimeStr + ' to ' + endTimeStr).start;   
             const end = getTimeRange(startTimeStr + ' to ' + endTimeStr).end;
             const eventStart = getNextDayOfWeek(startDate, dayAbbr);
             icsContent += 'BEGIN:VEVENT\n';
@@ -232,20 +184,31 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatDate(date) {
         return date.toISOString().replace(/[-:]/g, '').split('T')[0];
     }
+
+    function convertToHHMMSS(timeString) {
+        const [time, AMPM] = timeString.split(/(AM|PM)/);
+        let [hours, minutes] = time.split(':');
+
+        if (AMPM === 'PM' && hours < 12) {
+            hours = parseInt(hours, 10) + 12;
+        }
+
+        if (AMPM === 'AM' && hours === 12) {
+            hours = '00';
+        }
+
+        return `${hours}${minutes}00`;
+    }
+
     function getTimeRange(timeString) {
         const [start, end] = timeString.split(' to ');
-        const startRange = Object.keys(timeRanges).find(range => range.startsWith(start));
-        const endRange = Object.keys(timeRanges).find(range => range.endsWith(end));
-        
-        if (!startRange || !endRange) {
-            console.warn(`Time range not found for: ${timeString}`);
-            return { start: "000000", end: "000000" };
-        }
-        
+        const startRange = convertToHHMMSS(start);
+        const endRange = convertToHHMMSS(end);
+
         return {
-            start: timeRanges[startRange].start,
-            end: timeRanges[endRange].end
-        };
+            start: startRange,
+            end: endRange
+        }
     }
 
     
