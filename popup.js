@@ -147,6 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
         "09:00AM to 09:45AM": { start: "090000", end: "094500" },
         "09:45AM to 10:00AM": { start: "094500", end: "100000" },
         "10:00AM to 12:00PM": { start: "100000", end: "120000" },
+        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
+        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
+        "03:00PM to 04:00PM": { start: "150000", end: "160000" }
 
         // For 3-hour classes (Lab)
         "07:00AM to 10:00AM": { start: "070000", end: "100000" },
