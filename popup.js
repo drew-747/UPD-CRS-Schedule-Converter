@@ -140,6 +140,15 @@ document.addEventListener('DOMContentLoaded', function() {
         "02:30PM to 04:00PM": { start: "143000", end: "160000" },
         "04:00PM to 05:30PM": { start: "160000", end: "173000" },
         "05:30PM to 07:00PM": { start: "173000", end: "190000" },
+
+        // One-day GE schedules
+        "07:00AM to 10:00AM": { start: "070000", end: "100000" },
+        "10:00AM to 01:00PM": { start: "100000", end: "130000" },
+        "01:00PM to 04:00PM": { start: "130000", end: "160000" },
+        "04:00PM to 07:00PM": { start: "160000", end: "190000" },
+
+        "09:00AM to 12:00PM": { start: "090000", end: "120000" },
+        "02:00PM to 05:00PM": { start: "140000", end: "170000" },
         
         // Two-day PE schedules
         "07:00AM to 08:00AM": { start: "070000", end: "080000" },
