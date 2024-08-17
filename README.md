@@ -1,9 +1,7 @@
 <img src="https://seeklogo.com/images/U/university-of-the-philippines-diliman-upd-logo-65770383FD-seeklogo.com.png" alt="University of the Philippines Diliman Logo" width="100" height="100">
 
 ## UPD CRS Schedule Converter
-
-## Overview
-The UPD CRS Schedule Converter is a browser extension that converts UPD CRS schedules into formats compatible with commonly used calendar and scheduling applications. 
+The **UPD CRS Schedule Converter** is a browser extension designed to convert schedules from the University of the Philippines Diliman (UPD) Computerized Registration System (CRS) into formats compatible with popular calendar and scheduling applications.
 
 ## 🚀 Features
 - 🔄 Converts UPD CRS schedules into various formats (.ics, CSV and json)
