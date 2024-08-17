@@ -74,8 +74,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
-    
-        return schedule;
+
+        const mergedSchedule = [];
+        const mergedClasses = {};
+
+        schedule.forEach(item => {
+            const { time, class: className, day } = item;
+            if (mergedClasses[className + time]) {
+                mergedClasses[className + time].day.push(day);
+            } else {
+                mergedClasses[className + time] = {
+                    time,
+                    day: [day],
+                    class: className
+                };
+            }
+        });
+
+        for (const className in mergedClasses) {
+            mergedSchedule.push(mergedClasses[className]);
+        }
+
+        return mergedSchedule;
     }
 
     function mergeSameClasses(daySchedule) {
@@ -107,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return merged;
     }
     
-    function getDayAbbreviation(day) {
+    function getDayAbbreviation(days) {
         const dayAbbreviations = {
             'mon': 'MO',
             'tue': 'TU',
@@ -117,7 +137,10 @@ document.addEventListener('DOMContentLoaded', function() {
             'sat': 'SA',
             'sun': 'SU'
         };
-        return dayAbbreviations[day] || '';
+
+        const mappedDays = days.map(day => dayAbbreviations[day]);
+        
+        return mappedDays.join() || '';
     }
 
     function downloadFile(content, filename, mimeType) {
@@ -211,7 +234,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    
     function convertToCSV(schedule) {
         let csvContent = 'Day,Start Time,End Time,Class\n';
         schedule.forEach(item => {
