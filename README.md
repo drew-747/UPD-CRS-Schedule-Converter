@@ -15,12 +15,15 @@ The **UPD CRS Schedule Converter** is a browser extension designed to convert sc
 2. **Load the extension** in developer mode through your browser's extension settings by selecting "load unpacked."
 
 ## 🛠️ Usage
-1. **Pin** this extension on your browser once successfully installed.
-2. Login and navigate to the **UPD CRS Portal**.
-3. Access the **Student Registration** section of the UPD CRS Portal found on the left hand side.
-5. **Click** the extension and select your preferred download format.
-6. **Save** the file on your device.
-7. Import/access file on application of choice.
+1. Pin the extension to your browser once installed.
+2. Log in and navigate to the UPD CRS Portal.
+3. Go to the Student Registration section on the left-hand side.
+4. Click the extension icon and choose your preferred download format.
+5. Save the file locally.
+6. Import or open the file in your chosen application.
 
 ## 📜 License
 This project is licensed under the MIT License. 
+
+## 🔒 Privacy Policy
+For information on how this extension handles your data and ensures your privacy, see `policy.md` and review the  Privacy Policy.
