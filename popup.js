@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "03:00PM to 07:00PM": { start: "150000", end: "190000" },
         "07:00PM to 11:00PM": { start: "190000", end: "230000" },
         
-        // Special cases for PE or short-duration classes
+        // Special cases for Hour-Long PE or short-duration GE Classes
         "07:00AM to 08:00AM": { start: "070000", end: "080000" },
         "08:00AM to 09:00AM": { start: "080000", end: "090000" },
         "09:00AM to 10:00AM": { start: "090000", end: "100000" },
