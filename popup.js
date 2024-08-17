@@ -75,11 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Merge into a single calendar event if class is scheduled on multiple days
         const mergedSchedule = [];
         const mergedClasses = {};
 
         schedule.forEach(item => {
             const { time, class: className, day } = item;
+            // Dictionary key is class name combined with time slot to avoid duplicates (e.g. Math 2x classes where online and face-to-face sessions have different schedules)
             if (mergedClasses[className + time]) {
                 mergedClasses[className + time].day.push(day);
             } else {
