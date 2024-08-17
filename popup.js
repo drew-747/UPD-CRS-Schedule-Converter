@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         schedule.forEach(item => {
             const dayAbbr = getDayAbbreviation(item.day);
             const [startTimeStr, endTimeStr] = item.time.split(' to ');
-            const start = getTimeRange(startTimeStr + ' to ' + endTimeStr).start;   
+            const start = getTimeRange(startTimeStr + ' to ' + endTimeStr).start;
             const end = getTimeRange(startTimeStr + ' to ' + endTimeStr).end;
             const eventStart = getNextDayOfWeek(startDate, dayAbbr);
             icsContent += 'BEGIN:VEVENT\n';
