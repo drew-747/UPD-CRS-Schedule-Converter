@@ -26,4 +26,4 @@ The **UPD CRS Schedule Converter** is a browser extension designed to convert sc
 This project is licensed under the MIT License. 
 
 ## 🔒 Privacy Policy
-For information on how this extension handles your data and ensures your privacy, see `privacy.md` and review the  Privacy Policy.
+For information on how this extension handles your data and ensures your privacy, see `policy.md` and review the  Privacy Policy.
