@@ -209,18 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function convertToHHMMSS(timeString) {
-        const [time, AMPM] = timeString.split(/(AM|PM)/);
-        let [hours, minutes] = time.split(':');
-
-        if (AMPM === 'PM' && hours < 12) {
-            hours = parseInt(hours, 10) + 12;
-        }
-
-        if (AMPM === 'AM' && hours === 12) {
-            hours = '00';
-        }
-
-        return `${hours}${minutes}00`;
+        return moment(timeString, 'hh:mmA').format('HHmmss');
     }
 
     function getTimeRange(timeString) {
