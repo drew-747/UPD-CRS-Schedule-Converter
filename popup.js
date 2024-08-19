@@ -74,8 +74,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
-    
-        return schedule;
+
+        // Merge into a single calendar event if class is scheduled on multiple days
+        const mergedSchedule = [];
+        const mergedClasses = {};
+
+        for (const item of schedule) {
+            if (mergedClasses[item.class + item.time]) {
+                mergedClasses[item.class + item.time].day.push(item.day);
+            } else {
+                mergedClasses[item.class + item.time] = {
+                    time: item.time,
+                    day: [item.day],
+                    class: item.class
+                };
+            }
+        }
+
+        for (const item in mergedClasses) {
+            mergedSchedule.push(mergedClasses[item]);
+        }
+
+        return mergedSchedule;
     }
 
     function mergeSameClasses(daySchedule) {
@@ -107,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return merged;
     }
     
-    function getDayAbbreviation(day) {
+    function getDayAbbreviation(days) {
         const dayAbbreviations = {
             'mon': 'MO',
             'tue': 'TU',
@@ -117,7 +137,10 @@ document.addEventListener('DOMContentLoaded', function() {
             'sat': 'SA',
             'sun': 'SU'
         };
-        return dayAbbreviations[day] || '';
+
+        const mappedDays = days.map(day => dayAbbreviations[day]);
+        
+        return mappedDays.join() || '';
     }
 
     function downloadFile(content, filename, mimeType) {
@@ -129,54 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
             saveAs: true
         });
     }
-
-    const timeRanges = {
-        "07:00AM to 08:30AM": { start: "070000", end: "083000" },
-        "08:00AM to 09:00AM": { start: "080000", end: "090000" },
-        "08:30AM to 10:00AM": { start: "083000", end: "100000" },
-        "10:00AM to 11:30AM": { start: "100000", end: "113000" },
-        "11:30AM to 01:00PM": { start: "113000", end: "130000" },
-        "01:00PM to 02:30PM": { start: "130000", end: "143000" },
-        "02:30PM to 04:00PM": { start: "143000", end: "160000" },
-        "04:00PM to 05:30PM": { start: "160000", end: "173000" },
-        "05:30PM to 07:00PM": { start: "173000", end: "190000" },
-    
-        // Extended or non-standard times
-        "07:00AM to 08:45AM": { start: "070000", end: "084500" },
-        "08:45AM to 09:00AM": { start: "084500", end: "090000" },
-        "09:00AM to 09:45AM": { start: "090000", end: "094500" },
-        "09:45AM to 10:00AM": { start: "094500", end: "100000" },
-        "10:00AM to 12:00PM": { start: "100000", end: "120000" },
-        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
-        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
-        "03:00PM to 04:00PM": { start: "150000", end: "160000" },
-
-        // For 3-hour classes (Lab)
-        "07:00AM to 10:00AM": { start: "070000", end: "100000" },
-        "10:00AM to 01:00PM": { start: "100000", end: "130000" },
-        "01:00PM to 04:00PM": { start: "130000", end: "160000" },
-        "04:00PM to 07:00PM": { start: "160000", end: "190000" },
-
-        // For 4-hour classes (lab)
-        "07:00AM to 11:00AM": { start: "070000", end: "110000" },
-        "11:00AM to 03:00PM": { start: "110000", end: "150000" },
-        "03:00PM to 07:00PM": { start: "150000", end: "190000" },
-        "07:00PM to 11:00PM": { start: "190000", end: "230000" },
-        
-        // Special cases for Hour-Long PE or short-duration GE Classes
-        "07:00AM to 08:00AM": { start: "070000", end: "080000" },
-        "08:00AM to 09:00AM": { start: "080000", end: "090000" },
-        "09:00AM to 10:00AM": { start: "090000", end: "100000" },
-        "10:00AM to 11:00AM": { start: "100000", end: "110000" },
-        "11:00AM to 12:00PM": { start: "110000", end: "120000" },
-        "12:00PM to 01:00PM": { start: "120000", end: "130000" },
-        "01:00PM to 02:00PM": { start: "130000", end: "140000" },
-        "02:00PM to 03:00PM": { start: "140000", end: "150000" },
-        "03:00PM to 04:00PM": { start: "150000", end: "160000" },
-        "04:00PM to 05:00PM": { start: "160000", end: "170000" },
-        "05:00PM to 06:00PM": { start: "170000", end: "180000" },
-        "06:00PM to 07:00PM": { start: "180000", end: "190000" }
-    };
 
     function convertToICS(schedule) {
         const { startDate, endDate } = getSemesterDates();
@@ -232,23 +207,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatDate(date) {
         return date.toISOString().replace(/[-:]/g, '').split('T')[0];
     }
-    function getTimeRange(timeString) {
-        const [start, end] = timeString.split(' to ');
-        const startRange = Object.keys(timeRanges).find(range => range.startsWith(start));
-        const endRange = Object.keys(timeRanges).find(range => range.endsWith(end));
-        
-        if (!startRange || !endRange) {
-            console.warn(`Time range not found for: ${timeString}`);
-            return { start: "000000", end: "000000" };
-        }
-        
-        return {
-            start: timeRanges[startRange].start,
-            end: timeRanges[endRange].end
-        };
+
+    function convertToHHMMSS(timeString) {
+        return moment(timeString, 'hh:mmA').format('HHmmss');
     }
 
-    
+    function getTimeRange(timeString) {
+        const [start, end] = timeString.split(' to ');
+        const startRange = convertToHHMMSS(start);
+        const endRange = convertToHHMMSS(end);
+
+        return {
+            start: startRange,
+            end: endRange
+        }
+    }
+
     function convertToCSV(schedule) {
         let csvContent = 'Day,Start Time,End Time,Class\n';
         schedule.forEach(item => {
