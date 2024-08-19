@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "UPD CRS Schedule Converter",
-  "version": "2.0",
+  "version": "2.0.1",
   "description": "Converts UPD CRS schedule to ICalendar (.ics), CSV, and JSON formats",
   "permissions": ["activeTab", "downloads", "scripting"],
   "action": {
